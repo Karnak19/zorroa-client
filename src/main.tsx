@@ -1,10 +1,16 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import 'tailwindcss/tailwind.css';
+
+import App from './App';
+import { MagicProvider } from './context/magic';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <MagicProvider>
+      <App />
+    </MagicProvider>
   </React.StrictMode>,
-  document.getElementById('root')
-)
+  document.getElementById('root'),
+);

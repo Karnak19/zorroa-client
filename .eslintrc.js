@@ -37,6 +37,7 @@ module.exports = {
       'error',
       { argsIgnorePattern: '^_', ignoreRestSiblings: true },
     ],
+    '@typescript-eslint/no-non-null-assertion': off,
     'react/jsx-filename-extension': [2, { extensions: ['.tsx', '.jsx'] }],
   },
 };
