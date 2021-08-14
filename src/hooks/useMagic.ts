@@ -1,24 +1,18 @@
-import { LoginWithMagicLinkConfiguration } from 'magic-sdk';
-import { useEffect } from 'react';
 import { useMagicContext } from '../context/magic';
 import magic from '../magic';
 
-const useMagic = () => {
-  const magicCtx = useMagicContext();
-  const login = async (config: LoginWithMagicLinkConfiguration) => {
-    await magic.auth.loginWithMagicLink(config);
+export default function useMagic() {
+  const { setState } = useMagicContext();
+
+  const reauth = async () => {
+    if (await magic.user.isLoggedIn()) {
+      const token = await magic.user.getIdToken();
+      setState(token);
+      localStorage.setItem('MAGIC_TOKEN', token);
+    }
   };
 
-  useEffect(() => {
-    const init = async () => {
-      if (await magic.user.isLoggedIn()) magicCtx.setState(await magic.user.getMetadata());
-      else login({ email: 'basile64.v@gmail.com' });
-    };
-
-    init();
-  }, []);
-
-  return { login, user: magic.user };
-};
-
-export default useMagic;
+  return {
+    reauth,
+  };
+}
