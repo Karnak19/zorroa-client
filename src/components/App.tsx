@@ -16,7 +16,7 @@ function App() {
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios.get<{ BEP20: RootObject }>(
-        `https://lprewards.ternoa.dev/api/rewards/getRewards?address=${wallet}`,
+        `https://lprewards.ternoa.dev/api/rewards/getRewards?address=${wallet!.toLowerCase()}`,
       );
       setTokens(data.BEP20);
     };
