@@ -83,10 +83,10 @@ function App() {
           <Card className="col-span-2 text-center font-bold text-2xl">
             Today yield: {tokens.capsHourlyResult.reduce((p, c) => p + c.value, 0).toFixed(2)} CAPS
           </Card>
-          <div className="card bg-base-200 p-10 lg:col-span-2 sm:col-span-4">
+          <div className="card bg-base-200 p-10 lg:col-span-2 xs:col-span-4">
             <Line data={hourly} />
           </div>
-          <div className="card bg-base-200 p-10 lg:col-span-2 sm:col-span-4">
+          <div className="card bg-base-200 p-10 lg:col-span-2 xs:col-span-4">
             <Bar data={dayToDay} />
           </div>
         </>
