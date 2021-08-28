@@ -57,7 +57,40 @@ function App() {
 
   return (
     <Layout>
-      <div className="p-10 card bg-base-200 col-span-4">
+      <div className="alert alert-warning col-span-4">
+        <div className="flex-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="#2196f3"
+            className="w-6 h-6 mx-2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+          <label>
+            This is not an official Ternoa website.{' '}
+            <span className="text-xs italic font-light">
+              I uses their web API to retrieve data. No data is collected.
+            </span>
+          </label>
+        </div>
+      </div>
+      <div className="p-10 card bg-base-200 col-span-4 relative">
+        <div className="absolute right-3 top-2 text-2xs">
+          <a
+            className="link link-primary"
+            target="_blank"
+            href="https://github.com/Karnak19/zorroa-client/tree/ternoa-lp"
+          >
+            Github
+          </a>
+        </div>
         <div className="form-control">
           <label className="label">
             <span className="label-text">BEP20 wallet</span>
@@ -74,19 +107,34 @@ function App() {
       {!wallet && !tokens.totalUserReward && <Spinner />}
       {wallet && tokens.totalUserReward && (
         <>
-          <Card className="col-span-4 p-10 text-3xl font-bold text-center">
+          <Card className="lg:col-span-2 col-span-4 lg:row-span-2 p-10 text-3xl font-bold text-center grid place-items-center">
             TOTAL: {tokens.totalUserReward.toFixed(2)} CAPS
           </Card>
-          <Card className="col-span-2 text-center font-semibold text-primary text-xl">
-            APR: {tokens.APR.toFixed(2)} %
+          <Card className="col-span-2 text-center font-semibold text-primary text-xl grid place-items-center">
+            <p
+              className="z-10"
+              style={{
+                position: 'inherit',
+              }}
+            >
+              APR: {tokens.APR.toFixed(2)} %
+            </p>
           </Card>
-          <Card className="col-span-2 text-center font-bold text-2xl">
-            Today yield: {tokens.capsHourlyResult.reduce((p, c) => p + c.value, 0).toFixed(2)} CAPS
+          <Card className="col-span-2 text-center font-bold text-2xl grid place-items-center">
+            <p
+              className="z-10"
+              style={{
+                position: 'inherit',
+              }}
+            >
+              Today reward: {tokens.capsHourlyResult.reduce((p, c) => p + c.value, 0).toFixed(2)}{' '}
+              CAPS
+            </p>
           </Card>
-          <div className="card bg-base-200 p-10 lg:col-span-2 col-span-4">
+          <div className="card bg-base-200 p-6 lg:col-span-2 col-span-4">
             <Line data={hourly} />
           </div>
-          <div className="card bg-base-200 p-10 lg:col-span-2 col-span-4">
+          <div className="card bg-base-200 p-6 lg:col-span-2 col-span-4">
             <Bar data={dayToDay} />
           </div>
         </>
