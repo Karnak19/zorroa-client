@@ -25,21 +25,6 @@ function App() {
   }, [wallet]);
   useEffect(() => {}, []);
 
-  const dayToDay: ChartData = {
-    labels: tokens?.capsDailyResult
-      ?.map((hour) => new Date(hour.month).toLocaleDateString())
-      .reverse(),
-    datasets: [
-      {
-        label: 'Day To Day',
-        data: tokens?.capsDailyResult?.map((hour) => hour.value).reverse(),
-        fill: true,
-        backgroundColor: '#c807ed',
-        borderColor: '#2b40fb',
-      },
-    ],
-  };
-
   const hourly: ChartData = {
     labels: tokens?.capsHourlyResult
       ?.map((hour) => new Date(hour.month).toTimeString().split('GMT')[0])
@@ -49,8 +34,26 @@ function App() {
         label: 'Today Hourly',
         data: tokens?.capsHourlyResult?.map((hour) => hour.value).reverse(),
         fill: true,
-        backgroundColor: '#2b40fb',
-        borderColor: '#c807ed',
+        backgroundColor: 'rgba(200, 7, 237, 0.5)',
+        borderColor: 'rgba(200, 7, 237, 1)',
+        tension: 0.2,
+        borderCapStyle: 'round',
+      },
+    ],
+  };
+
+  const dayToDay: ChartData = {
+    labels: tokens?.capsDailyResult
+      ?.map((hour) => new Date(hour.month).toLocaleDateString())
+      .reverse(),
+    datasets: [
+      {
+        label: 'Day To Day',
+        data: tokens?.capsDailyResult?.map((hour) => hour.value).reverse(),
+        fill: true,
+        backgroundColor: 'rgba(200, 7, 237, 0.5)',
+        borderColor: 'rgba(200, 7, 237, 1)',
+        borderWidth: 3,
       },
     ],
   };
