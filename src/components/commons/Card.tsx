@@ -19,6 +19,7 @@ function Card({ children, title, className = '' }: IProps) {
       <img
         src={CAPS_LOGO}
         className="h-24 w-24 absolute opacity-70 -top-4 -right-4 transform rotate-12"
+        style={{ filter: 'drop-shadow(30px 10px 14px #ffff)' }}
       />
       {children}
     </div>

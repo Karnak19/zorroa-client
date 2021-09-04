@@ -7,6 +7,18 @@ module.exports = {
       gridTemplateColumns: {
         layout: '300px 1fr',
       },
+      fontFamily: {
+        play: [
+          'Play',
+          'Segoe UI',
+          'Roboto',
+          'Helvetica',
+          'Arial',
+          'sans serif',
+          'Apple Color Emoji',
+          'Segoe UI Emoji',
+        ],
+      },
     },
   },
   variants: {

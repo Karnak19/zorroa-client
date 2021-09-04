@@ -8,6 +8,8 @@ import type { RootObject } from './types';
 import Layout from './layout/Layout';
 import Spinner from './commons/spinner/Spinner';
 import Card from './commons/Card';
+import SpanReward from './commons/SpanReward';
+import Form from './Form';
 
 function App() {
   const [tokens, setTokens] = React.useState({} as RootObject);
@@ -84,54 +86,52 @@ function App() {
           </label>
         </div>
       </div>
-      <div className="p-10 card bg-base-200 col-span-4 relative">
-        <div className="absolute right-3 top-2 text-2xs">
-          <a
-            className="link link-primary"
-            target="_blank"
-            href="https://github.com/Karnak19/zorroa-client/tree/ternoa-lp"
-          >
-            Github
-          </a>
-        </div>
-        <div className="form-control">
-          <label className="label">
-            <span className="label-text">BEP20 wallet</span>
-          </label>
-          <input
-            type="text"
-            placeholder="BEP20 address"
-            className="input input-bordered"
-            value={wallet}
-            onChange={(e) => setWallet(e.target.value)}
-          />
-        </div>
-      </div>
+      <Form value={wallet} handleChange={(e) => setWallet(e.target.value)} />
       {!wallet && !tokens.totalUserReward && <Spinner />}
       {wallet && tokens.totalUserReward && (
         <>
-          <Card className="lg:col-span-2 col-span-4 lg:row-span-2 p-10 text-3xl font-bold text-center grid place-items-center">
-            TOTAL: {tokens.totalUserReward.toFixed(2)} CAPS
-          </Card>
-          <Card className="col-span-2 text-center font-semibold text-primary text-xl grid place-items-center">
+          <Card className="lg:col-span-4 col-span-2 row-span-2 text-indigo-200 text-center font-light text-3xl grid place-items-center p-10">
             <p
               className="z-10"
               style={{
                 position: 'inherit',
+              }}
+            >
+              Today reward:{' '}
+              <SpanReward
+                amount={tokens.capsHourlyResult.reduce((p, c) => p + c.value, 0).toFixed(2)}
+                size={4}
+              />
+            </p>
+          </Card>
+          <Card className="col-span-2 row-span-2 text-center font-semibold font-play text-pink-500 text-6xl grid place-items-center">
+            <p
+              className="z-10"
+              style={{
+                position: 'inherit',
+                textShadow:
+                  'rgb(255, 255, 255) 0px 0px 5px, rgb(255, 0, 255) 10px 10px 15px, rgb(0, 0, 0) 15px 15px 20px',
               }}
             >
               APR: {tokens.APR.toFixed(2)} %
             </p>
           </Card>
-          <Card className="col-span-2 text-center font-bold text-2xl grid place-items-center">
-            <p
-              className="z-10"
-              style={{
-                position: 'inherit',
-              }}
-            >
-              Today reward: {tokens.capsHourlyResult.reduce((p, c) => p + c.value, 0).toFixed(2)}{' '}
-              CAPS
+          <Card className="lg:col-span-2 col-span-4 text-indigo-400 text-xl text-center grid place-items-center">
+            <p style={{ zIndex: 10, position: 'inherit' }}>
+              since{' '}
+              {new Date(
+                tokens.capsDailyResult[tokens.capsDailyResult.length - 1].month,
+              ).toLocaleDateString()}
+              : <SpanReward amount={tokens.totalUserReward.toFixed(2)} size={3} />
+            </p>
+          </Card>
+          <Card className="lg:col-span-2 col-span-4 lg:row-span-1 text-indigo-400 text-xl text-center grid place-items-center">
+            <p style={{ zIndex: 10, position: 'inherit' }}>
+              CURRENT MONTH:{' '}
+              <SpanReward
+                amount={(tokens.totalUserReward - tokens.capsMonthlyResult[0].value).toFixed(2)}
+                size={3}
+              />
             </p>
           </Card>
           <div className="card bg-base-200 p-6 lg:col-span-2 col-span-4">
