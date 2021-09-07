@@ -128,7 +128,9 @@ function App() {
             <p style={{ zIndex: 10, position: 'inherit' }}>
               CURRENT MONTH:{' '}
               <SpanReward
-                amount={(tokens.totalUserReward - tokens.capsMonthlyResult[0].value).toFixed(2)}
+                amount={(
+                  tokens.totalUserReward - (tokens.capsMonthlyResult[0]?.value || 0)
+                ).toFixed(2)}
                 size={3}
               />
             </p>
