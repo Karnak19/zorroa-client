@@ -1,7 +1,5 @@
-import React, { ReactNode } from 'react';
+import tw from 'twin.macro';
 
-function Layout({ children }: { children: ReactNode }) {
-  return <div className="container mx-auto pt-10 grid grid-cols-4 gap-6">{children}</div>;
-}
+export const Layout = tw.div`container mx-auto pt-10 grid grid-cols-4 gap-6`;
 
 export default Layout;

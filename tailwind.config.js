@@ -24,9 +24,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require('@tailwindcss/forms'), require('daisyui')],
-  daisyui: {
-    styled: true,
-    themes: ['synthwave'],
-  },
+  plugins: [require('@tailwindcss/forms')],
 };

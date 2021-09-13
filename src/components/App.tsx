@@ -35,8 +35,8 @@ function App() {
         label: 'Today Hourly',
         data: tokens?.capsHourlyResult?.map((hour) => hour.value).reverse(),
         fill: true,
-        backgroundColor: 'rgba(200, 7, 237, 0.5)',
-        borderColor: 'rgba(200, 7, 237, 1)',
+        backgroundColor: 'rgba(219, 39, 119, 0.5)',
+        borderColor: 'rgba(219, 39, 119, 1)',
         tension: 0.2,
         borderCapStyle: 'round',
       },
@@ -52,8 +52,8 @@ function App() {
         label: 'Day To Day',
         data: tokens?.capsDailyResult?.map((hour) => hour.value).reverse(),
         fill: true,
-        backgroundColor: 'rgba(200, 7, 237, 0.5)',
-        borderColor: 'rgba(200, 7, 237, 1)',
+        backgroundColor: 'rgba(219, 39, 119, 0.5)',
+        borderColor: 'rgba(219, 39, 119, 1)',
         borderWidth: 3,
       },
     ],
@@ -61,35 +61,38 @@ function App() {
 
   return (
     <Layout>
-      <div className="alert alert-warning col-span-4">
-        <div className="flex-1">
+      <Card grid="col-span-4">
+        <div className="flex">
           <svg
             xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
-            stroke="#2196f3"
-            className="w-6 h-6 mx-2"
+            stroke="currentColor"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              strokeWidth="2"
+              strokeWidth={2}
               d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            ></path>
+            />
           </svg>
-          <label>
+          <label className="pl-6">
             This is not an official Ternoa website.{' '}
             <span className="text-xs italic font-light">
               I uses their web API to retrieve data. No data is collected.
             </span>
           </label>
         </div>
-      </div>
+      </Card>
       <Form value={wallet} handleChange={(e) => setWallet(e.target.value)} />
       {!wallet && !tokens.totalUserReward && <Spinner />}
       {wallet && tokens.totalUserReward && (
         <>
-          <Card className="lg:col-span-4 col-span-2 row-span-2 text-indigo-200 text-center font-light text-3xl grid place-items-center p-10">
+          <Card
+            grid="lg:col-span-4 col-span-2 row-span-2 "
+            className="text-center font-light text-3xl grid place-items-center p-10"
+          >
             <p
               className="z-10"
               style={{
@@ -103,19 +106,17 @@ function App() {
               />
             </p>
           </Card>
-          <Card className="col-span-2 row-span-2 text-center font-semibold font-play text-pink-500 text-6xl grid place-items-center">
-            <p
-              className="z-10"
-              style={{
-                position: 'inherit',
-                textShadow:
-                  'rgb(255, 255, 255) 0px 0px 5px, rgb(255, 0, 255) 10px 10px 15px, rgb(0, 0, 0) 15px 15px 20px',
-              }}
-            >
-              APR: {tokens.APR.toFixed(2)} %
-            </p>
+          <Card
+            grid="col-span-2 row-span-2"
+            className=" text-center font-semibold font-play text-6xl grid place-items-center"
+          >
+            <p className="z-10 text-white">APR: {tokens.APR.toFixed(2)} %</p>
           </Card>
-          <Card className="lg:col-span-2 col-span-4 text-indigo-400 text-xl text-center grid place-items-center">
+          <Card
+            logo
+            grid="lg:col-span-2 col-span-4"
+            className="text-xl text-center grid place-items-center"
+          >
             <p style={{ zIndex: 10, position: 'inherit' }}>
               since{' '}
               {new Date(
@@ -124,7 +125,11 @@ function App() {
               : <SpanReward amount={tokens.totalUserReward.toFixed(2)} size={3} />
             </p>
           </Card>
-          <Card className="lg:col-span-2 col-span-4 lg:row-span-1 text-indigo-400 text-xl text-center grid place-items-center">
+          <Card
+            logo
+            grid="lg:col-span-2 col-span-4 lg:row-span-1"
+            className="text-xl text-center grid place-items-center"
+          >
             <p style={{ zIndex: 10, position: 'inherit' }}>
               CURRENT MONTH:{' '}
               <SpanReward
@@ -135,12 +140,12 @@ function App() {
               />
             </p>
           </Card>
-          <div className="card bg-base-200 p-6 lg:col-span-2 col-span-4">
+          <Card grid="lg:col-span-2 col-span-4">
             <Line data={hourly} />
-          </div>
-          <div className="card bg-base-200 p-6 lg:col-span-2 col-span-4">
+          </Card>
+          <Card grid="lg:col-span-2 col-span-4">
             <Bar data={dayToDay} />
-          </div>
+          </Card>
         </>
       )}
     </Layout>

@@ -1,4 +1,5 @@
 import React from 'react';
+import Card from './commons/Card';
 
 function Form({
   value,
@@ -8,8 +9,8 @@ function Form({
   handleChange: React.ChangeEventHandler<HTMLInputElement>;
 }) {
   return (
-    <div className="p-10 card bg-base-200 col-span-4 relative">
-      <div className="absolute right-3 top-2 text-2xs">
+    <Card grid="col-span-4" className="relative">
+      <div className="absolute right-3 top-2 text-2xs text-purple-600 underline hover:text-purple-400">
         <a
           className="link link-primary"
           target="_blank"
@@ -18,19 +19,19 @@ function Form({
           Github
         </a>
       </div>
-      <div className="form-control">
-        <label className="label">
-          <span className="label-text">BEP20 wallet</span>
+      <div className="flex flex-col p-10">
+        <label className="flex items-center justify-between px-1 py-2">
+          <span className="text-sm">BEP20 wallet</span>
         </label>
         <input
           type="text"
           placeholder="BEP20 address"
-          className="input input-bordered"
+          className="flex-shrink text-sm bg-pink-900 bg-opacity-20 border-black transition px-4 py-3 rounded-md max-w-lg"
           value={value}
           onChange={handleChange}
         />
       </div>
-    </div>
+    </Card>
   );
 }
 
