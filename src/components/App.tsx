@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Bar, Line } from 'react-chartjs-2';
 import type { ChartData } from 'chart.js';
 
-import type { RootObject } from './types';
+import type { Result, RootObject } from './types';
 import Layout from './layout/Layout';
 import Spinner from './commons/spinner/Spinner';
 import Card from './commons/Card';
@@ -14,6 +14,17 @@ import Form from './Form';
 function App() {
   const [tokens, setTokens] = React.useState({} as RootObject);
   const [wallet, setWallet] = useLocalStorage('wallet', '');
+
+  const getCurrentMonthValue = (total: number, curr: Result) => {
+    const thisMonth = new Date().getMonth();
+    const lastMonth = new Date(curr.month).getMonth();
+
+    if (lastMonth === thisMonth) {
+      return total - curr.value;
+    }
+
+    return 0;
+  };
 
   useEffect(() => {
     const getData = async () => {
@@ -133,8 +144,9 @@ function App() {
             <p style={{ zIndex: 10, position: 'inherit' }}>
               CURRENT MONTH:{' '}
               <SpanReward
-                amount={(
-                  tokens.totalUserReward - (tokens.capsMonthlyResult[0]?.value || 0)
+                amount={getCurrentMonthValue(
+                  tokens.totalUserReward,
+                  tokens.capsMonthlyResult[0],
                 ).toFixed(2)}
                 size={3}
               />

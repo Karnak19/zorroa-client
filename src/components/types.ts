@@ -1,6 +1,6 @@
 export interface Result {
   _id: string;
-  month: Date;
+  month: string;
   address: string;
   value: number;
   network: string;
